@@ -1,4 +1,4 @@
-package com.springrestoauth2.test;
+package com.springoauth2rest.test;
 
 import sun.misc.BASE64Encoder;
 

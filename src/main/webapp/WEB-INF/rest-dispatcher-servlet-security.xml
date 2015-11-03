@@ -16,8 +16,11 @@
 <http pattern="/oauth/token" create-session="stateless" authentication-manager-ref="clientAuthenticationManager"
       xmlns="http://www.springframework.org/schema/security">
     <intercept-url pattern="/oauth/token" access="IS_AUTHENTICATED_FULLY"/>
+    
     <anonymous enabled="false"/>
-    <http-basic entry-point-ref="clientAuthenticationEntryPoint"/>
+   
+	<http-basic entry-point-ref="clientAuthenticationEntryPoint"/>
+    
     <!-- include this only if you need to authenticate clients via request parameters -->
     <custom-filter ref="clientCredentialsTokenEndpointFilter" after="BASIC_AUTH_FILTER"/>
     <access-denied-handler ref="oauthAccessDeniedHandler"/>
@@ -118,12 +121,12 @@
 <!-- Client Definition -->
 <oauth:client-details-service id="clientDetails">
 
-    <oauth:client client-id="my-trusted-client"
+<oauth:client client-id="infosys"
                   authorized-grant-types="password,authorization_code,refresh_token,implicit,redirect"
                   authorities="ROLE_CLIENT, ROLE_TRUSTED_CLIENT"
                   redirect-uri="/web"
                   scope="read,write,trust"
-                  access-token-validity="30"
+                  access-token-validity="500"
                   refresh-token-validity="600"/>
 
 </oauth:client-details-service>
@@ -132,7 +135,9 @@
 <sec:global-method-security pre-post-annotations="enabled" proxy-target-class="true">
     <sec:expression-handler ref="oauthExpressionHandler"/>
 </sec:global-method-security>
+
 <oauth:expression-handler id="oauthExpressionHandler"/>
+
 <oauth:web-expression-handler id="oauthWebExpressionHandler"/>
 
 </beans>
